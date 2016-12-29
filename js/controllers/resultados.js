@@ -4,15 +4,16 @@
         .module("demoQuiz")
         .controller("controladorPadre", ['$scope', 'quizMetrics', 'DataService',
             function($scope, quizMetrics, DataService){
+            
             $scope.$on('resultadosEnviados', function (evt, args) {
                 console.log('Ya se enviaron los resultados');
-                $scope.$broadcast('mostrar resultados');
+                $scope.$broadcast('mostrarResultados');
             });
+
         }])
 
         .controller('resultsCtrl', ['$scope', 'quizMetrics', 'DataService',
             function($scope, quizMetrics, DataService){
-                $scope.prueba = quizMetrics.opcionUno();
 
 
 
@@ -31,12 +32,11 @@
 
             $scope.$on('mostrarResultados', function (evt, args) {
                 console.log('Ya se deben mostrar los resultados en pantalla');
-                quizMetrics.opcionUno(function (texto) {
+                quizMetrics.opcionUno(function(texto) {
                     $scope.texto = texto;
-                    console.log('respuestas correctas: ', quizMetrics.respuestasCorrectas);
+                    console.log('Respuestas Correctas: ', quizMetrics.respuestasCorrectas);
                 })
             });
-
 
             var dq = this;
 
@@ -48,11 +48,6 @@
             dq.calcularPorcentaje = calcularPorcentaje;
             dq.preguntaActiva = 0;
             dq.$scope = $scope;
-
-
-            $scope.emitMessage = function () {
-                $scope.$emit('algunEvento', { message: quizMetrics.respuestasCorrectas });
-            }
             
             function calcularPorcentaje() {
                 return quizMetrics.numCorrect / DataService.preguntasQuiz.length * 100;
@@ -163,8 +158,9 @@
                 quizMetrics.changeState("quiz", false);
                 quizMetrics.changeState("results", true);
 
-                console.log('aquí se emite hacia el controlador padre cuando ya se enviaron las respuestas');
+                console.log('Aquí se emite hacia el controlador padre cuando ya se enviaron las respuestas');
                 $scope.$emit('resultadosEnviados');
+
             }
         }])
 

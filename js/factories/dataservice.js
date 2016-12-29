@@ -16,7 +16,7 @@
     }
 
 
-    var respuestasCorrectas = [1,2,0,0,0,0,0,0,0,0];
+    var respuestasCorrectas = [1,1,0,1,1,2,0,1,3,2];
 
     var respOpcionUno = [1,0,0,0,0,0,0,0,0,0];
 
